@@ -9,7 +9,6 @@ import platform
 MODEL_BASE = 'research'
 sys.path.append(MODEL_BASE)
 sys.path.append(MODEL_BASE + '/object_detection')
-sys.path.append(MODEL_BASE + '/slim')
 PATH_TO_LABELS = MODEL_BASE + '/object_detection/data/object-detection.pbtxt'
 
 from decorator import requires_auth
@@ -20,8 +19,8 @@ from flask import request
 from flask import url_for
 from flask_wtf.file import FileField
 import numpy as np
-from PIL import Image
-from PIL import ImageDraw
+import Image
+import ImageDraw
 import tensorflow as tf
 from utils import label_map_util
 from werkzeug.datastructures import CombinedMultiDict
@@ -170,3 +169,5 @@ client = ObjectDetector()
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=80, debug=False)
+  app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);});
