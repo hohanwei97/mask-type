@@ -18,9 +18,9 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask_wtf.file import FileField
-from PIL import numpy as np
+import numpy as np
 from PIL import Image
-import ImageDraw
+from PIL import ImageDraw
 import tensorflow as tf
 from utils import label_map_util
 from werkzeug.datastructures import CombinedMultiDict
