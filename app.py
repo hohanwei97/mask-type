@@ -168,5 +168,6 @@ client = ObjectDetector()
 
 
 if __name__ == '__main__':
-  app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);});
+  port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
