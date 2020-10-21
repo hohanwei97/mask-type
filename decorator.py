@@ -5,7 +5,7 @@ from flask import Response
 
 
 USERNAME = 'username'
-PASSWORD = 'passw0rd'
+PASSWORD = 'password'
 
 
 def check_auth(username, password):
