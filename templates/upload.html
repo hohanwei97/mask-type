@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Right Mask?</title>
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+tr:nth-child(even) {
+  background-color: #eee;
+}
+tr:nth-child(odd) {
+ background-color: #fff;
+}
+th {
+  background-color: black;
+  color: white;
+}
+</style>
+    <link rel='shortcut icon' href='favicon.ico'/>
+
+    <script language="javascript" type="text/javascript">
+      function ChangePhoto(name, img) {
+        img = typeof img !== 'undefined' ? img : "{{ result['original'] }}";
+        target = document.getElementById("label");
+        target.innerHTML = name;
+        target = document.getElementById("photo");
+        target.src = img;
+      }
+
+      function WaitDisplay() {
+        target = document.getElementById("result");
+        target.style.display="none";
+        target = document.getElementById("loading");
+        target.style.display="";
+        setTimeout(function() {
+          document.getElementById("upload").submit();}, 100);
+        }
+    </script>
+
+  </head>
+  <body>
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="." class="w3-bar-item w3-button">Right Mask?</a>
+	</div>
+</div>
+<div class="w3-content" style="max-width:1100px">
+<div class="w3-row w3-padding-64" id="about">
+ <div class="w3-col m6 w3-padding-large">
+    {% from "_formhelpers.html" import render_field %}
+    <br>
+    <h3>Upload a photo file with mask.</h3>
+    <div>
+      <form id="upload" method=post action={{ url_for('post') }} enctype="multipart/form-data">
+        {{ render_field(photo_form.input_photo) }}
+        <p><input type="button" onclick="WaitDisplay();" value="Upload"></p>
+      </form>
+    </div>
+
+    <div id="result">
+      {% if result|length > 0 %}
+        <div id="label">original</div>
+        <div><img id="photo" src="{{ result['original'] }}" align="left" hspace="10" vspace="10"></div>
+        <p>
+          <a href="javascript:void(0);" onclick="ChangePhoto('original');">original</a>
+          </br>
+          {% for name, img in result.items() %}
+            {% if name != 'original' %}
+              <a href="javascript:void(0);"
+                 onclick="ChangePhoto('{{ name }}', '{{ result[ name ] }}');">{{ name }}</a>
+              </br>
+            {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+    <div id="loading" style="display:none">
+      <h2>Detecting Objects...</h2>
+    </div>
+	</div>
+
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">About Label</h1><br>
+      <table>
+  <tr>
+    <th>cloth_face_mask</th>
+    <th>surgeon</th> 
+    <th>N95</th>
+  </tr>
+  <tr>
+    <td>prevent large droplet</td>
+    <td>prevent large droplet and virus</td>
+    <td>prevent large droplet, virus and 95% particle</td>
+  </tr>
+  <tr>
+    <td>recommend for person that go out short period</td>
+    <td>recommend for person that work ouside for long time</td>
+    <td>recommend for healthcare and frontline member </td>
+  </tr>
+  <tr>
+    <td>reusable after wash</td>
+    <td>non-reusable</td>
+    <td>non-reusable</td>
+  </tr>
+</table>
+    </div>
+  </div>
+  
+  </body>
+</html>
