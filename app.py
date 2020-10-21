@@ -18,8 +18,8 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask_wtf.file import FileField
-import numpy as np
-import Image
+from PIL import numpy as np
+from PIL import Image
 import ImageDraw
 import tensorflow as tf
 from utils import label_map_util
